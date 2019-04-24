@@ -30,16 +30,16 @@ Vagrant.configure("2") do |config|
     app2.vm.network "private_network", ip: "192.168.201.12"
   end
 
-  config.vm.define :elasticsearch, autostart: true do |elasticsearch|
-    elasticsearch.vm.box = "centos/7"
-    elasticsearch.vm.hostname = "elasticsearch"
-    elasticsearch.vm.network "private_network", ip: "192.168.201.13"
-  end
-
   config.vm.define :mongodb, autostart: true do |mongodb|
     mongodb.vm.box = "centos/7"
     mongodb.vm.hostname = "mongodb"
-    mongodb.vm.network "private_network", ip: "192.168.201.14"
+    mongodb.vm.network "private_network", ip: "192.168.201.13"
+  end
+
+  config.vm.define :elasticsearch, autostart: true do |elasticsearch|
+    elasticsearch.vm.box = "centos/7"
+    elasticsearch.vm.hostname = "elasticsearch"
+    elasticsearch.vm.network "private_network", ip: "192.168.201.14"
   end
 
 end

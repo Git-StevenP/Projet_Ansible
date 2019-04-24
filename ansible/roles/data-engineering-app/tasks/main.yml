@@ -26,11 +26,25 @@
     update_cache: yes
     state: latest
 
+
+- name: Install python3.6 packages.
+  yum:
+    update_cache: True
+    name:
+      - python36u
+      - python36u-libs
+      - python36u-devel
+      - python36u-pip
+      - python36u-setuptools
+
 - name: Install pip
   yum:
     name: python-pip
     update_cache: yes
     state: present
+
+- name: Upgrade pip.
+  command: pip3.6 install --upgrade pip
 
 - name: Install setuptools
   yum:
@@ -41,6 +55,7 @@
 - name: Install python requirements
   pip:
     requirements: /app/data-engineering/requirements.txt
+    executable: /bin/pip3.6
 
 
 - name: Make /app directory

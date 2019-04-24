@@ -1,46 +1,47 @@
 ---
-- name: upgrade all packages
-  yum:
-    name: '*'
-    state: latest
 
 - name: Install yum-utils
   yum:
     name: yum-utils
     state: present
 
-- name: install the 'Development tools' package group
+- name: Install the 'Development tools' package group
   yum:
     name: "@Development tools"
     state: present
 
+- name: Install epel-release
+  package:
+    name: epel-release
+    state: present
 
-- name: Add repo
+- name: Install python3 repository
   yum:
     name: https://centos7.iuscommunity.org/ius-release.rpm
     state: present
 
-- name: Install python
+- name: Install python3.6 packages.
   yum:
-    name: python
-    update_cache: yes
-    state: latest
+    update_cache: True
+    name:
+      - python36u
+      - python36u-libs
+      - python36u-devel
+      - python36u-pip
+      - python36u-setuptools
 
-- name: Install pip
+- name: Install gcc compilator since it is required to install some of pip dependencies.
   yum:
-    name: python-pip
-    update_cache: yes
-    state: present
+    name: gcc
+
+- name: Upgrade pip.
+  command: pip3.6 install --upgrade pip
 
 - name: Install setuptools
   yum:
     name: python-setuptools
     update_cache: yes
-    state: present
-
-- name: Install python requirements
-  pip:
-    requirements: /app/data-engineering/requirements.txt
+    state: latest
 
 
 - name: Make /app directory
@@ -54,11 +55,16 @@
     src: data-engineering.tar
     dest: /app/
 
+- name: Install python requirements
+  pip:
+    requirements: /app/data-engineering/requirements.txt
+    executable: /bin/pip3.6
+#  command: pip3 install -r /data-engineering/requirements.txt
 
 - name: Copy local service config file to the target
   copy:
     src: app.service
-    dest: /lib/systemd/system/
+    dest: /etc/systemd/system/
 
 - name: Reload services
   command: systemctl daemon-reload

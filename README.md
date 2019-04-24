@@ -58,6 +58,7 @@ To create the Vms, just run
 
 ```
 $ cd ansible
-$ vagrant ssh <vm_name> (ex: vagrant ssh haproxy)
+$ vagrant up
+$ ansible-playbook -i inventories deploy-app.yml
 ```
 

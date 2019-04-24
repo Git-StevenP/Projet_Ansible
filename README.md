@@ -43,8 +43,8 @@ For this project, 5 Vagrant machines are provided:
 - haproxy: 192.168.201.10
 - app1: 192.168.201.11
 - app2: 192.168.201.12
-- mongodb: 192.168.201.13
-- elasticsearch: 192.168.201.14
+- elasticsearch: 192.168.201.13
+- mongodb: 192.168.201.14
 
 To create the Vms, just run
 

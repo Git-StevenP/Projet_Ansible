@@ -1,0 +1,70 @@
+---
+- name: upgrade all packages
+  yum:
+    name: '*'
+    state: latest
+
+- name: Install yum-utils
+  yum:
+    name: yum-utils
+    state: present
+
+- name: install the 'Development tools' package group
+  yum:
+    name: "@Development tools"
+    state: present
+
+
+- name: Add repo
+  yum:
+    name: https://centos7.iuscommunity.org/ius-release.rpm
+    state: present
+
+- name: Install python
+  yum:
+    name: python
+    update_cache: yes
+    state: latest
+
+- name: Install pip
+  yum:
+    name: python-pip
+    update_cache: yes
+    state: present
+
+- name: Install setuptools
+  yum:
+    name: python-setuptools
+    update_cache: yes
+    state: present
+
+- name: Install python requirements
+  pip:
+    requirements: /app/data-engineering/requirements.txt
+
+
+- name: Make /app directory
+  file:
+    path: /app
+    state: directory
+
+
+- name: Copy local app to the target and unzip it
+  unarchive:
+    src: data-engineering.tar
+    dest: /app/
+
+
+- name: Copy local service config file to the target
+  copy:
+    src: app.service
+    dest: /lib/systemd/system/
+
+- name: Reload services
+  command: systemctl daemon-reload
+
+- name: Start app.service
+  service:
+    name: app.service
+    enabled: yes
+state: started

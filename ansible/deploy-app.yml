@@ -74,4 +74,4 @@
 - hosts: apps
   become: yes
   roles:
-  - role: data-engineering-app
+    - role: data-engineering-app

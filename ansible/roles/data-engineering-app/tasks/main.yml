@@ -67,4 +67,4 @@
   service:
     name: app.service
     enabled: yes
-state: started
+    state: started

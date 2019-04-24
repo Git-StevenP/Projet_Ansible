@@ -75,3 +75,14 @@
   become: yes
   roles:
     - role: data-engineering-app
+
+# - name: smoke test 
+#   hosts: all
+#   gather_facts: no
+    
+#   tasks:
+#   - name:  "Notify the smoke tests"
+#     debug:
+#     msg: "Trigger smoke tests"
+#     notify: "smoke"
+#     changed_when: true

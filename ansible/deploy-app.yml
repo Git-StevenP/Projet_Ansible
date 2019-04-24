@@ -8,7 +8,7 @@
   become: yes
   name: Include mongodb
   roles:
-    - role: mongo
+    - role: mongodb
       vars:
         # the mongo version to use when installing via yum, ignored when installing from rpm files
         mongo_version: 3.6

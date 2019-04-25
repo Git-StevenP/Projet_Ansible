@@ -53,12 +53,3 @@ To create the Vms, just run
 $ cd ansible
 $ vagrant up
 ```
-
-To create the Vms, just run
-
-```
-$ cd ansible
-$ vagrant up
-$ ansible-playbook -i inventories deploy-app.yml
-```
-
